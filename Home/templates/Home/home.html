@@ -219,13 +219,16 @@
                             <div id="seconds" class="date"></div>
                         </div>
                     </div>
+                    <form method="post">
+                    {% csrf_token %}
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="enter email address"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" name="discount">
                         <div class="input-group-append">
-                            <a href="#" class="input-group-text btn_2" id="basic-addon2">book now</a>
+                            <input type="submit" value="book now" class="book_now_btn">
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -271,13 +274,16 @@
                     <h5>Join Our Newsletter</h5>
                     <h2>Subscribe to get Updated
                         with new offers</h2>
+                    <form method="post">
+                    {% csrf_token %}
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="enter email address"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a href="#" class="input-group-text btn_2" id="basic-addon2">subscribe now</a>
-                        </div>
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" name="subscribe">
+                            <div class="input-group-append">
+                                <input type="submit" value="subscribe now" class="book_now_btn">
+                            </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -370,6 +376,33 @@
     line-height: 26px;
     color: #000;
     opacity: 100;
+}
+.book_now_btn{
+    margin-left: -1px;
+    display: flex;
+    box-sizing: border-box;
+    unicode-bidi: isolate;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 45px;
+    border: 0px solid transparent;
+    background-color: #ff3368;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 5px;
+    background-image: linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%);
+}
+
+.book_now_btn:hover {
+    opacity: 0.8;
 }
 </style>
 

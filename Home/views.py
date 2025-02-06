@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.shortcuts import redirect, render
-from django.core.paginator import Paginator
 from .models import Products, Cart, Profile
+from django.core.mail import send_mail
 # Create your views here.
 
 def home(request):
@@ -15,6 +16,22 @@ def home(request):
             price= prod.price
         )
         return redirect('Home:home')
+    if request.method== "POST" and "discount" in request.POST:
+        email = request.POST['discount']
+        send_mail(
+        "From Furniture Shop",
+        f"You had the discount {user}",
+        email,
+        [settings.EMAIL_HOST_USER],
+        )
     
-    context= {'products' : products, 'user': user, 'top_orders': top_orders}
+    if request.method== "POST" and "subscribe" in request.POST:
+        email = request.POST['subscribe']
+        send_mail(
+        "From Furniture Shop",
+        f"You had subscribed {user}",
+        email,
+        [settings.EMAIL_HOST_USER],
+        )
+    context= {'products' : products, 'user': user, 'top_orders': top_orders, }
     return render(request, 'Home/home.html', context)
