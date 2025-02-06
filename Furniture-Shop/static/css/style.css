@@ -2892,14 +2892,6 @@ ul {
   transition: 0.5s;
 }
 
-/* line 93, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product_list.scss */
-.single_product_item .single_product_text a i {
-  float: right;
-  font-size: 18px;
-  line-height: 26px;
-  color: #000;
-}
-
 /* line 102, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product_list.scss */
 .single_product_item:hover {
   box-shadow: 0px 10px 20px 0px rgba(0, 23, 51, 0.09);
