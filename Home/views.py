@@ -8,6 +8,7 @@ def home(request):
     products= Products.objects.all()
     user= Profile.objects.get(name= request.user)
     top_orders = Products.get_largest_orders(5)
+    carts= Cart.objects.all()
     if request.method== "POST" and "add_to_cart" in request.POST:
         product_id= request.POST.get("add_to_cart")
         prod= Products.objects.get(id= product_id)
@@ -33,5 +34,5 @@ def home(request):
         email,
         [settings.EMAIL_HOST_USER],
         )
-    context= {'products' : products, 'user': user, 'top_orders': top_orders, }
+    context= {'products' : products, 'user': user, 'top_orders': top_orders, 'carts': carts}
     return render(request, 'Home/home.html', context)

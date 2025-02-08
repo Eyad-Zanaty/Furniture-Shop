@@ -3,11 +3,21 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+PRDUCTS_COLORS = [
+    ("Red", "Red"),
+    ("Orange", "Orange"),
+    ("Yellow", "Yellow"),
+    ("Black", "Black"),
+    ("White", "White"),
+    ("Blue", "Blue"),
+]
+
 class Products(models.Model):
     name= models.CharField(max_length= 25)
     image= models.ImageField(upload_to='products/')
     price= models.DecimalField(max_digits=6, decimal_places=2)
     orders= models.IntegerField(blank=True, null=True)
+    color= models.CharField(max_length=25, choices=PRDUCTS_COLORS)
     
     def __str__(self):
         return str(self.name)
