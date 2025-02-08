@@ -101,13 +101,12 @@
     <!-- breadcrumb start-->
 
     <!--================Category Product Area =================-->
-    <form method="get">
+
     <section class="cat_product_area section_padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="left_sidebar_area">
-
                         <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
                                 <h3>Color Filter</h3>
@@ -137,11 +136,13 @@
                                         <div class="price_text">
                                             <p>Price :</p>
                                         </div>
+                                        <form method="get">
                                         <div class="price_value d-flex justify-content-center">
                                             <input type="text" class="js-input-from" id="price_from" name="price__gt" value="{{ filter.form.price__gt.value }}">
                                             <span>to</span>
                                             <input type="text" class="js-input-to" id="price_to" name="price__lt" value="{{ filter.form.price__lt.value }}">
-                                        </div>                                        
+                                        </div> 
+                                                                             
                                     </div>
                                 </div>
                             </div>
@@ -159,10 +160,12 @@
 
                                 </div>
                                 <div class="single_product_menu d-flex">
+
                                     <div class="input-group">
                                         {{ filter.form.name }}
                                         <input type="submit" class="btn btn-light btn-sm">
                                     </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +179,12 @@
                                 <div class="single_product_text">
                                     <h4>{{p.name}}</h4>
                                     <h3>${{p.price}}</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                    <form method="post" action=" ">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="add_to_cart" value="{{p.id}}">
+                                        <input type="submit" class="add_cart_btn" value="+ add to cart">
+                                        <i class="ti-heart"></i></a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +218,6 @@
             </div>
         </div>
     </section>
-</form>
     <!--================End Category Product Area =================-->
 
     <!-- product_list part start-->
@@ -243,6 +250,49 @@
     <!-- product_list part end-->
 
 <style>
+.single_product_item .add_cart_btn {
+    display: none;
+    color: #ff3368;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: -8px;
+    margin-top: 3px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.single_product_item .add_cart_btn i {
+    font-size: 18px;
+    line-height: 26px;
+    color: #000;
+    float: right;
+}
+
+/* Show the button when the product is hovered */
+.single_product_item:hover .add_cart_btn {
+    display: inline-block;  /* Make the button visible on hover */
+    opacity: 1;  /* Ensure full opacity */
+}
+
+.single_product_item .add_cart_btn:hover {
+    color: #ff3368;
+    opacity: 1;
+}
+.single_product_item .single_product_text i {
+    opacity: 0;
+}
+.single_product_item:hover .single_product_text i {
+    float: right;
+    font-size: 18px;
+    line-height: 26px;
+    color: #000;
+    opacity: 100;
+}
 .main_menu .cart i:after {
   position: absolute;
   border-radius: 50%;
