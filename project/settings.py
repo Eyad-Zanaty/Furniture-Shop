@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #apps
     'Home',
     'Shop',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
