@@ -1,9 +1,10 @@
-import heapq
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 # Create your models here.
 
-PRDUCTS_COLORS = [
+products_colors= [
     ("Red", "Red"),
     ("Orange", "Orange"),
     ("Yellow", "Yellow"),
@@ -12,12 +13,49 @@ PRDUCTS_COLORS = [
     ("Blue", "Blue"),
 ]
 
+quality= [
+    ("yes","yes"),
+    ("no", "no")
+]
+
+when_packeting= [
+    ("Without touch of hand","Without touch of hand"),
+    ("With touch of hand", "With touch of hand")
+]
+
+class Rating(models.Model):
+    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
+    rate= models.TextField(max_length=500)
+class Rebly(models.Model):
+    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
+    time= models.DateTimeField(auto_now=True)
+    comment= models.TextField(max_length=500)
+
+class Comments(models.Model):
+    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
+    time= models.DateTimeField(auto_now=True)
+    comment= models.TextField(max_length=500)
+    reply= models.ForeignKey(Rebly, on_delete=models.CASCADE)
+
 class Products(models.Model):
     name= models.CharField(max_length= 25)
     image= models.ImageField(upload_to='products/')
     price= models.DecimalField(max_digits=6, decimal_places=2)
-    orders= models.IntegerField(blank=True, null=True)
-    color= models.CharField(max_length=25, choices=PRDUCTS_COLORS)
+    orders= models.IntegerField(default=0)
+    color= models.CharField(max_length=25, choices=products_colors)
+    breif= models.TextField(max_length=250, blank=True, null=True)
+    description= models.TextField(max_length=750, blank=True, null=True)
+    width= models.IntegerField()
+    height= models.IntegerField()
+    depth= models.IntegerField()
+    weight= models.IntegerField()
+    quality_checking= models.CharField(max_length=3, choices=quality, )
+    freshness_duration= models.DateField(auto_now=True)
+    packeting= models.CharField(max_length=50, choices=when_packeting, )
+    box_contains= models.IntegerField()
+    comment= models.ManyToManyField(Comments,blank=True)
+    rating= models.ManyToManyField('Rating', blank=True)
+    slug= models.SlugField(blank= True, null= True)
     
     def __str__(self):
         return str(self.name)
@@ -25,6 +63,15 @@ class Products(models.Model):
     @staticmethod
     def get_largest_orders(n):
         return Products.objects.all().order_by('-orders')[:n]
+    
+    def save(self, *args, **kwargs):
+        self.slug= slugify(self.name)
+        super(Products, self).save(*args, **kwargs)
+    
+    @property    
+    def days(self):
+        delta = (self.freshness_duration - date.today()).days
+        return max(delta, 0)
 
 class Cart(models.Model):
     product= models.ForeignKey(Products, on_delete=models.PROTECT)
@@ -39,3 +86,4 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.name)
+    

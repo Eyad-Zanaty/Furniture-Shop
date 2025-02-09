@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Home',
     'Shop',
     'django_filters',
+    'Product_Details',
 ]
 
 MIDDLEWARE = [
