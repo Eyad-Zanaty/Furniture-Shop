@@ -17,6 +17,7 @@ def home(request):
             price= prod.price
         )
         return redirect('Home:home')
+    
     if request.method== "POST" and "discount" in request.POST:
         email = request.POST['discount']
         send_mail(

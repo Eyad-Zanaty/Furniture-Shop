@@ -27,15 +27,15 @@ class Rating(models.Model):
     name= models.CharField(max_length=50)
     rate= models.TextField(max_length=500)
 class Rebly(models.Model):
-    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
-    time= models.DateTimeField(auto_now=True)
+    name= models.CharField(max_length=25)
+    time= models.DateTimeField(auto_now_add=True)
     comment= models.TextField(max_length=500)
 
 class Comments(models.Model):
-    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
-    time= models.DateTimeField(auto_now=True)
+    name= models.CharField(max_length=25)
+    time= models.DateTimeField(auto_now_add=True)
     comment= models.TextField(max_length=500)
-    reply= models.ForeignKey(Rebly, on_delete=models.CASCADE)
+    reply= models.ForeignKey(Rebly, on_delete=models.CASCADE, blank=True, null=True)
 
 class Products(models.Model):
     name= models.CharField(max_length= 25)
@@ -50,7 +50,7 @@ class Products(models.Model):
     depth= models.IntegerField()
     weight= models.IntegerField()
     quality_checking= models.CharField(max_length=3, choices=quality)
-    freshness_duration= models.DateField(auto_now=True)
+    freshness_duration= models.DateField(auto_now_add=True)
     packeting= models.CharField(max_length=50, choices=when_packeting)
     box_contains= models.IntegerField()
     comment= models.ManyToManyField(Comments, blank=True)
