@@ -24,7 +24,7 @@ when_packeting= [
 ]
 
 class Rating(models.Model):
-    name= models.ForeignKey('Profile', on_delete=models.PROTECT)
+    name= models.CharField(max_length=50)
     rate= models.TextField(max_length=500)
 class Rebly(models.Model):
     name= models.ForeignKey('Profile', on_delete=models.PROTECT)
@@ -49,12 +49,12 @@ class Products(models.Model):
     height= models.IntegerField()
     depth= models.IntegerField()
     weight= models.IntegerField()
-    quality_checking= models.CharField(max_length=3, choices=quality, )
+    quality_checking= models.CharField(max_length=3, choices=quality)
     freshness_duration= models.DateField(auto_now=True)
-    packeting= models.CharField(max_length=50, choices=when_packeting, )
+    packeting= models.CharField(max_length=50, choices=when_packeting)
     box_contains= models.IntegerField()
-    comment= models.ManyToManyField(Comments,blank=True)
-    rating= models.ManyToManyField('Rating', blank=True)
+    comment= models.ManyToManyField(Comments, blank=True)
+    rating= models.ManyToManyField(Rating, blank=True)
     slug= models.SlugField(blank= True, null= True)
     
     def __str__(self):
