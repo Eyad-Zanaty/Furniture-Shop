@@ -26,7 +26,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                     <a class="dropdown-item" href="{% url 'Shop:shop' %}"> shop category</a>
-                                    <a class="dropdown-item" href="single-product.html">product details</a>
+                                    <a class="dropdown-item" href="#">product details</a>
                                     
                                 </div>
                             </li>
@@ -36,17 +36,12 @@
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="login.html"> login</a>
-                                    <a class="dropdown-item" href="tracking.html">tracking</a>
-                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                    <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                    <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                    <a class="dropdown-item" href="elements.html">elements</a>
+                                    <a class="dropdown-item" href="{% url 'login' %}"> login</a>
+                                    <a class="dropdown-item" href="{% url 'Cart:cart' %}">shopping cart</a>
                                 </div>
                             </li>
-                            
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="{% url 'Contact:contact' %}">Contact</a>
                             </li>
                         </ul>
                     </div>
