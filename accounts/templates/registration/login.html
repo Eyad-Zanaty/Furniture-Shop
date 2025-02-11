@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load form_filters %}
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}" class="row contact_form">
+    {% csrf_token %}
+
+    <div class="col-md-12 form-group p_star">
+    {{ form.username|add_class:"form-control"|add_placeholder:"Username" }}
+    </div>
+    <div class="col-md-12 form-group p_star">
+    {{ form.password|add_class:"form-control"|add_placeholder:"Password" }}
+    </div>
+    <div class="col-md-12 form-group">
+      <div class="creat_account d-flex align-items-center">
+          <input type="checkbox" id="f-option" name="selector">
+          <label for="f-option">Remember me</label>
+      </div>
+      <input type="submit" value="login" class="btn_3">
+      <input type="hidden" name="next" value="{{ next }}">
+      <p><a href="{% url 'password_reset' %}" class="lost_pass">Lost password?</a></p>
+  </div>
+  </form>
+
+  {# Assumes you set up the password_reset view in your URLconf #}
+
+{% endblock %}
