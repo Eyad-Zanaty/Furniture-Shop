@@ -2,26 +2,26 @@ from rest_framework import generics
 from .serializers import ProductsSerializer, CommentsSerializer, ReblySerializer, RatingSerializer, CartSerializer, ProfileSerializer
 from Home.models import Products, Comments, Rebly, Rating, Cart, Profile
 
-class ProductsList(generics.RetrieveUpdateDestroyAPIView):
+class ProductsList(generics.ListCreateAPIView):
     queryset= Products.objects.all()
     serializer_class= ProductsSerializer
     
-class CommentsList(generics.RetrieveUpdateDestroyAPIView):
+class CommentsList(generics.ListCreateAPIView):
     queryset= Comments.objects.all()
     serializer_class= CommentsSerializer
     
-class ReblyList(generics.RetrieveUpdateDestroyAPIView):
+class ReblyList(generics.ListCreateAPIView):
     queryset= Rebly.objects.all()
     serializer_class= ReblySerializer
 
-class RatingList(generics.RetrieveUpdateDestroyAPIView):
+class RatingList(generics.ListCreateAPIView):
     queryset= Rating.objects.all()
     serializer_class= RatingSerializer
 
-class CartList(generics.RetrieveUpdateDestroyAPIView):
+class CartList(generics.ListCreateAPIView):
     queryset= Cart.objects.all()
     serializer_class= CartSerializer
     
-class ProfileList(generics.RetrieveUpdateDestroyAPIView):
+class ProfileList(generics.ListCreateAPIView):
     queryset= Profile.objects.all()
     serializer_class= ProfileSerializer
